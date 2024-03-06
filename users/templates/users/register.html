@@ -1,0 +1,31 @@
+{% extends "sort/base.html" %}
+
+{% block content %}
+<div class="content-section">
+    <form method="POST" class="col-md-12 mx-auto">
+        {% csrf_token %}
+        <fieldset class="p-4 rounded">
+            <legend class="border-bottom mb-4"><h2 class="text-center">Register</h2></legend>
+
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+            </div>
+            {% endif %}
+
+            {{ form.as_p }}
+            <div class="form-group mt-4 d-flex justify-content-center">
+                <button class="btn btn-info btn-block" type="submit">Register</button>
+            </div>
+        </fieldset>
+        <div class="border-top pt-3 mb-3">
+            <small class="text-light">Already have an account? <a style="text-decoration: none;" 
+                href="{% url 'login' %}" class="ml-2">Sign In</a></small>
+        </div>
+    </form>
+</div>
+{% endblock content %}
